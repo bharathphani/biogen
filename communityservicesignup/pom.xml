@@ -5,8 +5,8 @@
 	<artifactId>communityservicesignup</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>communityservicesignup magnus health assignment</name>
-	<description>communityservicesignup magnus health assignment</description>
+	<name>Magnus Health Assignment</name>
+	<description>Magnus Health Assignment for Community Services Signup</description>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -47,7 +47,7 @@
 	</dependencies>
 
 	<build>
-		<sourceDirectory>src</sourceDirectory>
+		<sourceDirectory>src.main.java</sourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
