@@ -30,19 +30,11 @@ public class UserService implements ServiceFacade {
 			return true;
 		} else if (args[0].equals("insert")) {
 			return userDAO.createUser((User) args[1]);
+		} else if (args[0].equals("insertmultiple")) {
+			return userDAO.createUser((User) args[1]);
 		} else if (args[0].equals("getAll")) {
 			return userDAO.getUsers();
 		}
-		// Check for multiple inserts.
-		if (args.length > 1) {
-			for (int i = 0; i < args.length; i++) {
-				if (args[i].equals("insertmultiple")) {
-					// Always pass the second parameter which is User Object
-					return userDAO.createUser((User) args[1]);
-				}
-			}
-		}
-
 		return null;
 	}
 }

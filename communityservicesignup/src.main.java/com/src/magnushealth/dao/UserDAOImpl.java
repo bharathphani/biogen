@@ -96,16 +96,16 @@ public class UserDAOImpl implements UserDAO {
 
 	private List<Object[]> userData() {
 		List<Object[]> users = new ArrayList<>();
-		users.add("Group1 03/02/2017 John Doe someaddress Exton 19341".split(" "));
-		users.add("Group2 03/04/2017 Jane Doe someaddress Exton 19341".split(" "));
-		users.add("Group3 03/05/2017 Sarah Bosch someaddress Exton 19341".split(" "));
-		users.add("Group4 03/06/2017 Michael Murray someaddress Exton 19341".split(" "));
-		users.add("Group5 03/07/2017 Barry Coy someaddress Exton 19341".split(" "));
-		users.add("Group6 03/08/2017 Daisy Chen someaddress Exton 19341".split(" "));
-		users.add("Group7 03/09/2017 May Williams someaddress Exton 19341".split(" "));
-		users.add("Group8 03/10/2017 Alex Johnson someaddress Exton 19341".split(" "));
-		users.add("Group9 03/11/2017 Ceasar McCoy someaddress Exton 19341".split(" "));
-		users.add("Group10 03/12/2017 Paula May someaddress Exton 19341".split(" "));
+		users.add("Group1 03/02/2017 John Doe someaddress Exton PA 19341".split(" "));
+		users.add("Group2 03/04/2017 Jane Doe someaddress Exton PA 19341".split(" "));
+		users.add("Group3 03/05/2017 Sarah Bosch someaddress Exton PA 19341".split(" "));
+		users.add("Group4 03/06/2017 Michael Murray someaddress Exton PA 19341".split(" "));
+		users.add("Group5 03/07/2017 Barry Coy someaddress Exton PA 19341".split(" "));
+		users.add("Group6 03/08/2017 Daisy Chen someaddress Exton PA 19341".split(" "));
+		users.add("Group7 03/09/2017 May Williams someaddress Exton PA 19341".split(" "));
+		users.add("Group8 03/10/2017 Alex Johnson someaddress Exton PA 19341".split(" "));
+		users.add("Group9 03/11/2017 Ceasar McCoy someaddress Exton PA 19341".split(" "));
+		users.add("Group10 03/12/2017 Paula May someaddress Exton PA 19341".split(" "));
 		return users;
 	}
 

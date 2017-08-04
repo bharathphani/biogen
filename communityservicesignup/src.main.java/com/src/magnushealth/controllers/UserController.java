@@ -3,6 +3,7 @@
  */
 package com.src.magnushealth.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class UserController {
 
 	/**
 	 * get all users
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
@@ -40,6 +42,7 @@ public class UserController {
 
 	/**
 	 * add one User
+	 * 
 	 * @param user
 	 * @return
 	 * @throws Exception
@@ -48,27 +51,55 @@ public class UserController {
 	public ResponseObject createUser(@RequestBody User user) throws Exception {
 		return getResponseObject((Integer) userService.doService("insert", user));
 	}
-	
+
 	/**
 	 * add multiple users
+	 * 
 	 * @param users
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/addmultipleusers", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseObject createMultipleUser(@RequestBody UserWrapper wrapper) throws Exception {
-		for(User user : wrapper.getUsers()) {
-			return getResponseObject((Integer) userService.doService("insertmultiple", user));	
+		List<Integer> respValues = new ArrayList<>();
+		Integer respVal = new Integer(0);
+		for (User user : wrapper.getUsers()) {
+			respVal = (Integer) userService.doService("insertmultiple", user);
+			respValues.add(respVal);
 		}
-		return null;
+		return isPersisted(respValues);
+
 	}
 
 	/**
 	 * Get Response Object
+	 * 
 	 * @param output
 	 * @return
 	 */
 	private ResponseObject getResponseObject(Integer output) {
 		return new ResponseObject(output == 1 ? true : false, output == 1 ? "successful" : "failed");
+	}
+
+	/**
+	 * Check if the user object got persisted or not, based on that respond success or fail.
+	 * 
+	 * @param respValues
+	 * @return
+	 */
+	private ResponseObject isPersisted(List<Integer> respValues) {
+		Boolean isResponse = false;
+		for (Integer val : respValues) {
+			if (val == 1) {
+				isResponse = true;
+			} else {
+				isResponse = false;
+			}
+		}
+		if (isResponse) {
+			return getResponseObject(1);
+		} else {
+			return getResponseObject(0);
+		}
 	}
 }
