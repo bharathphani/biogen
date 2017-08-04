@@ -18,4 +18,6 @@ public interface UserDAO {
 
 	public void insertBatch();
 
+	Integer createUsers(List<User> users);
+
 }

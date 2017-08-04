@@ -37,7 +37,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	/**
-	 * Add Users
+	 * Add User
 	 */
 	@Override
 	public Integer createUser(User user) {
@@ -55,6 +55,31 @@ public class UserDAOImpl implements UserDAO {
 						stmt.setString(8, user.getZip());
 					}
 				});
+	}
+
+	/**
+	 * Add Users
+	 */
+	@Override
+	public Integer createUsers(List<User> users) {
+		for (User user : users) {
+			return jdbcTemplate.update(
+					"INSERT INTO users(group_name, volunteer_date, first_name, last_name, street_address, city, state, zip) VALUES (?,?,?,?,?,?,?,?)",
+					new PreparedStatementSetter() {
+						public void setValues(PreparedStatement stmt) throws SQLException {
+							stmt.setString(1, user.getGroupName());
+							stmt.setString(2, user.getVolunteerDate());
+							stmt.setString(3, user.getFirstName());
+							stmt.setString(4, user.getLastName());
+							stmt.setString(5, user.getStreetAddress());
+							stmt.setString(6, user.getCity());
+							stmt.setString(7, user.getState());
+							stmt.setString(8, user.getZip());
+						}
+					});
+		}
+		return null;
+
 	}
 
 	/**
