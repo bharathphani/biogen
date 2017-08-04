@@ -94,10 +94,6 @@ public class UserDAOImpl implements UserDAO {
 				userData());
 	}
 
-	/**
-	 * Dummy User Data for getting all Volunteers information.
-	 * @return
-	 */
 	private List<Object[]> userData() {
 		List<Object[]> users = new ArrayList<>();
 		users.add("Group1 03/02/2017 John Doe someaddress Exton PA 19341".split(" "));
