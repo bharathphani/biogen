@@ -44,36 +44,6 @@ public class UserDAOImpl implements UserDAO {
 		return addUser(user);
 	}
 
-	/**
-	 * Add Users
-	 */
-	@Override
-	public Integer createUsers(List<User> users) {
-		for (User user : users) {
-			return addUser(user);
-		}
-		return null;
-
-	}
-
-	/**
-	 * creates a newtable for H2 DB during start of Application.java
-	 */
-	public void insertBatch() {
-		jdbcTemplate.execute("DROP TABLE users IF EXISTS");
-		jdbcTemplate.execute(
-				"CREATE TABLE users(id SERIAL, group_name VARCHAR(255), volunteer_date VARCHAR(30), first_name VARCHAR(255), last_name VARCHAR(255), street_address VARCHAR(255), city VARCHAR(255),  state VARCHAR(255), zip VARCHAR(20))");
-		jdbcTemplate.batchUpdate(
-				"INSERT INTO users(group_name, volunteer_date, first_name, last_name, street_address, city, state, zip) VALUES (?,?,?,?,?,?,?,?)",
-				userData());
-	}
-
-	/**
-	 * add User
-	 * 
-	 * @param user
-	 * @return
-	 */
 	private Integer addUser(User user) {
 		return jdbcTemplate.update(
 				"INSERT INTO users(group_name, volunteer_date, first_name, last_name, street_address, city, state, zip) VALUES (?,?,?,?,?,?,?,?)",
@@ -92,8 +62,44 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	/**
+	 * Add Users
+	 */
+	@Override
+	public Integer createUsers(List<User> users) {
+		for (User user : users) {
+			return jdbcTemplate.update(
+					"INSERT INTO users(group_name, volunteer_date, first_name, last_name, street_address, city, state, zip) VALUES (?,?,?,?,?,?,?,?)",
+					new PreparedStatementSetter() {
+						public void setValues(PreparedStatement stmt) throws SQLException {
+							stmt.setString(1, user.getGroupName());
+							stmt.setString(2, user.getVolunteerDate());
+							stmt.setString(3, user.getFirstName());
+							stmt.setString(4, user.getLastName());
+							stmt.setString(5, user.getStreetAddress());
+							stmt.setString(6, user.getCity());
+							stmt.setString(7, user.getState());
+							stmt.setString(8, user.getZip());
+						}
+					});
+		}
+		return null;
+
+	}
+
+	/**
+	 * creates a newtable for H2 DB during start of Application.java
+	 */
+	public void insertBatch() {
+		jdbcTemplate.execute("DROP TABLE users IF EXISTS");
+		jdbcTemplate.execute(
+				"CREATE TABLE users(id SERIAL, group_name VARCHAR(255), volunteer_date VARCHAR(30), first_name VARCHAR(255), last_name VARCHAR(255), street_address VARCHAR(255), city VARCHAR(255),  state VARCHAR(255), zip VARCHAR(20))");
+		jdbcTemplate.batchUpdate(
+				"INSERT INTO users(group_name, volunteer_date, first_name, last_name, street_address, city, state, zip) VALUES (?,?,?,?,?,?,?,?)",
+				userData());
+	}
+
+	/**
 	 * Dummy User Data for getting all Volunteers information.
-	 * 
 	 * @return
 	 */
 	private List<Object[]> userData() {
