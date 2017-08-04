@@ -56,8 +56,8 @@ public class UserController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/addmultipleusers", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseObject createMultipleUser(@RequestBody UserWrapper wrapper) throws Exception {
-		for(User user : wrapper.getUsers()) {
+	public ResponseObject createMultipleUser(@RequestBody UserWrapper users) throws Exception {
+		for(User user : users) {
 			return getResponseObject((Integer) userService.doService("insert", user));	
 		}
 		return null;
