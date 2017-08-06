@@ -25,6 +25,10 @@ import com.src.magnushealth.service.ServiceFacade;
 @RestController
 public class UserController {
 
+	private static final String GET_ALL = "getAll";
+	private static final String INSERT = "insert";
+	private static final String INSERT_MULTIPLE = "insertmultiple";
+
 	@Autowired
 	private ServiceFacade userService;
 
@@ -37,7 +41,7 @@ public class UserController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/getusers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> userInfo() throws Exception {
-		return (List<User>) userService.doService("getAll");
+		return (List<User>) userService.doService(GET_ALL);
 	}
 
 	/**
@@ -49,7 +53,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/addusers", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseObject createUser(@RequestBody User user) throws Exception {
-		return getResponseObject((Integer) userService.doService("insert", user));
+		return getResponseObject((Integer) userService.doService(INSERT, user));
 	}
 
 	/**
@@ -64,7 +68,7 @@ public class UserController {
 		List<Integer> respValues = new ArrayList<>();
 		Integer respVal = new Integer(0);
 		for (User user : wrapper.getUsers()) {
-			respVal = (Integer) userService.doService("insertmultiple", user);
+			respVal = (Integer) userService.doService(INSERT_MULTIPLE, user);
 			respValues.add(respVal);
 		}
 		return isPersisted(respValues);
@@ -82,7 +86,8 @@ public class UserController {
 	}
 
 	/**
-	 * Check if the user object got persisted or not, based on that respond success or fail.
+	 * Check if the user object got persisted or not, based on that respond
+	 * success or fail.
 	 * 
 	 * @param respValues
 	 * @return
