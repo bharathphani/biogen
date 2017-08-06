@@ -10,6 +10,24 @@
 
 ####Open Eclipse and Create Dynamic Web Project : Communityservicesignup Select Use default location folder checkbox. Target Runtime as Dynamic Web Module version as 3.1 Configuration as Default Configuration, Click on Finish
 
+
+##Setup Tomcat Server
+How TO Enable Server Locations in tomcat/ Why tomcat server location property is greyed in Eclipse
+
+First Make sure there are no projects added in the server.
+On the Servers view, delete all the webapps published under your server (right click on the server > Remove or right click on the server > Add and Remove and then remove manually the webapps) and finally right click on the server > Publish (the 'empty' content). This way you would un-gray the Server Locations area.
+- Second Right click on the empty server and select General > Click on Switch Location to point from [workspace metadata] to Location: /Servers/Tomcatv8.0 Server at localhost.server
+- Test the server by starting the server, entering localhost:8080 to get the Developer Quick Start screen. 
+
+Refer to following videos : https://www.youtube.com/watch?v=orctlc_F5Y0 and https://www.youtube.com/watch?v=HH1rOhpwdY4
+
+###How to resolve Error 
+If you get following error : Server Tomcat v8.0 Server at localhost was unable to start within 45 seconds. If the server requires more time, try increasing the timeout in the server editor.
+Resolution :Open tomcat Server view   -> double click tomcat -> drop down the Timeouts section
+
+If you get following error : index.html not displaying for my WebApp (Tomcat 7 in Eclipse) and you get 404 not found error.
+Resolution : You might have had the index.html in the wrong location, it shouldn't be under WEB-INF but under WebContent (the parent directory of WEB-INF). The 404 was in fact the massive hint.
+
 ###Step 2.
 
 ####Convert Project to Maven Project to add all required Spring MVC dependencies to project.
@@ -179,20 +197,60 @@ Method : get
 
 ### Add User
 
-Add User :http://localhost:8080/addusers
+Add User :http://localhost:8080/adduser
 Method : Post 
 Payload : 
 {
  	"id": 11,
- 	"groupName": "Group11",
+ 	"groupName": "Group00",
  	"volunteerDate": "03/13/2017",
  	"firstName": "Deb",
  	"lastName": "Daisy",
  	"streetAddress": "someaddress",
  	"city": "Exton",
- 	"state": "19341",
- 	"zip": null
+ 	"state": "PA",
+ 	"zip": "19341"
  }
+ 
+ Response : 
+ {
+"success": true,
+"message": "successful"
+}
+
+
+
+
+### Add Users
+
+Add User :http://localhost:8080/addusers
+Method : Post 
+Payload : 
+{
+	"users": [{
+			"id": 11,
+			"groupName": "Group11",
+			"volunteerDate": "03/13/2017",
+			"firstName": "Deb",
+			"lastName": "Daisy",
+			"streetAddress": "someaddress",
+			"city": "Exton",
+			"state": "state",
+			"zip": "19380"
+		},
+		{
+			"id": 12,
+			"groupName": "Group12",
+			"volunteerDate": "03/14/2017",
+			"firstName": "Pat",
+			"lastName": "Smith",
+			"streetAddress": "someaddress",
+			"city": "Exton",
+			"state": "state1",
+			"zip": "19380"
+		}
+	]
+}
  
  Response : 
  {
