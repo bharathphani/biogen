@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.src.magnushealth.model.ResponseObject;
@@ -64,7 +65,9 @@ public class UserController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/addmultipleusers", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
 	public ResponseObject createMultipleUser(@RequestBody UserWrapper wrapper) throws Exception {
+		System.out.println("wrapper ::: "+ wrapper.getUsers().get(0));
 		List<Integer> respValues = new ArrayList<>();
 		Integer respVal = new Integer(0);
 		for (User user : wrapper.getUsers()) {
